@@ -12,8 +12,8 @@ class listController extends Controller
 {
    public function listing()
    {
-     $tables = DB::select("select * from productlist");
-     return view('user.listing')->with('tables',$tables);
+     $tables = DB::table("productlist")->paginate(2);
+     return view('user.listing',['tables'=>$tables]);
    }
    
     public function addproduct()
@@ -66,4 +66,16 @@ class listController extends Controller
         session()->flash('success','Record updated successfully.');
         return redirect()->action('listController@listing');
    }
+   
+   public function search(Request $request)
+    {
+        /*$search = $request->input('search');
+        $task = Task::latest()->search($search)->paginate(5);
+        echo $task ;
+        die;
+        return view('tasks.tasks', compact('tasks', 'search'));*/
+        $search = $request->get('search');
+        $tables = DB::table('productlist')->where('name', 'like', '%' . $search . '%')->paginate(2);
+        return view('user.listing',['tables'=>$tables]);
+    }
 }

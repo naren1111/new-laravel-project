@@ -7,14 +7,46 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Tasks List</div>
                 <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="">
+                
                 @if(session('success'))
                         <div class="alert alert-success" role='alert'>
                         
                         {{session('success')}}
                          </div>
                         @endif                
-                <a href="{{ route('task.create') }}"><input type="button" class="btn btn-primary" value="Add Task"/></a>
+                
+                <form class="form-horizontal" role="form" method="get" action="{{ route('task.search') }}">
+                         <div class="box-header">
+                            <div style="padding-bottom: 50px;">
+                                <div class="col-md-2">
+                                    <span style="font-weight: bold;">Title : </span>
+                                </div>
+                                <div class="col-md-4">
+                                    
+                                    <input type="search" name="search" id="search" style="width: 250px;" class="form-control" value="<?php //if(isset($_POST['name'])){ echo $_POST['name']; } ?>" />
+                                </div>
+                                <!--<div class="col-md-2">
+                                    <span style="font-weight: bold;">Status : </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="verified" name="status" style="width: 250px;">
+                                        <option value="-1">--Select--</option>
+                                        <!--<option value="1" <?php // if(isset($_POST['status']) && $_POST['status']=="1" ){ echo "selected"; } ?>>Active</option>
+                                        <option value="0" <?php // if(isset($_POST['status']) && $_POST['status']=="0" ){ echo "selected"; } ?>>In-Active</option>
+                                    </select>
+                                </div>-->
+                                
+                            </div>
+                            <div style="padding-bottom: 50px;">
+                                <div class="col-md-12">
+                                <a href="{{ route('task.create') }}"><input type="button" class="btn btn-primary" value="Add Task"/></a>
+                                    <input type="submit" value="Search" class="btn btn-primary"/>
+                                    &nbsp;<a href="{{ url('/tasks') }}"><input type="button" value="Show All" class="btn btn-primary"/></a>
+                                </div>
+                            </div>                                                        
+                             
+                        </div><!-- /.box-header -->
+                
                     <table id="example1" class="table table-bordered table-striped">
                             <thead class="tableheading">
                               <tr>
@@ -51,6 +83,7 @@
                                @endif   
                             </tbody>
                           </table>
+                          {{ $tasks->links() }}
                        </form>   
                 </div>
             </div>

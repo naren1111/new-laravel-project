@@ -28,6 +28,8 @@ Route::post('/addproduct/user/', 'listController@create')->name('user.insetprodu
 Route::get('/delete/{id}', 'listController@destroy')->name('user.deleteproduct');
 Route::get('/edit product/{id}', 'listController@edit')->name('user.editproduct');
 Route::post('/productupdate/{updateid}', 'listController@update')->name('user.updateproduct');
+Route::get('/search/product', 'listController@search')->name('user.search');
+
 
 Route::get('/tasks', 'TaskController@index')->name('task.index');
 Route::get('/create', 'TaskController@create')->name('task.create');
@@ -35,3 +37,5 @@ Route::post('/store', 'TaskController@store')->name('task.store');
 Route::post('/update/{id}', 'TaskController@update')->name('task.update');
 Route::get('/edit/task/{id}', 'TaskController@edit')->name('task.edit');
 Route::get('/delete/task/{id}', 'TaskController@destroy')->name('task.delete');
+
+Route::get('/search', 'TaskController@search')->name('task.search');

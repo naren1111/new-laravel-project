@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;  
 
 class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::All();
-        return view('tasks.tasks',compact('tasks',$tasks));
+       $tasks = DB::table('tasks')->paginate(2); 
+       return view('tasks.tasks',['tasks'=>$tasks]);
+        /*$tasks = Task::All();
+        return view('tasks.tasks',compact('tasks',$tasks));*/
     }
     
     public function create()
@@ -63,5 +66,17 @@ class TaskController extends Controller
                 
         $request->session()->flash('success','Your details have now been insert!');
         return redirect()->action('TaskController@index');
+    }
+    
+    public function search(Request $request)
+    {
+        /*$search = $request->input('search');
+        $task = Task::latest()->search($search)->paginate(5);
+        echo $task ;
+        die;
+        return view('tasks.tasks', compact('tasks', 'search'));*/
+        $search = $request->get('search');
+        $tasks = DB::table('tasks')->where('title', 'like', '%' . $search . '%')->paginate(2);
+        return view('tasks.tasks',['tasks'=>$tasks]);
     }
 }
