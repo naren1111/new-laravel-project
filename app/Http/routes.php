@@ -38,4 +38,4 @@ Route::post('/update/{id}', 'TaskController@update')->name('task.update');
 Route::get('/edit/task/{id}', 'TaskController@edit')->name('task.edit');
 Route::get('/delete/task/{id}', 'TaskController@destroy')->name('task.delete');
 
-Route::get('/search', 'TaskController@search')->name('task.search');
+//Route::get('/search', 'TaskController@search')->name('task.search');

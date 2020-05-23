@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class listController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
    public function listing()
    {
      $tables = DB::table("productlist")->paginate(2);

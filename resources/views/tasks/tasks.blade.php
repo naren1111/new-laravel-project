@@ -15,7 +15,7 @@
                          </div>
                         @endif                
                 
-                <form class="form-horizontal" role="form" method="get" action="{{ route('task.search') }}">
+                <form class="form-horizontal" role="form" method="get" action="{{ route('task.index') }}">
                          <div class="box-header">
                             <div style="padding-bottom: 50px;">
                                 <div class="col-md-2">
@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     
-                                    <input type="search" name="search" id="search" style="width: 250px;" class="form-control" value="<?php //if(isset($_POST['name'])){ echo $_POST['name']; } ?>" />
+                                    <input type="search" name="search" id="search" style="width: 250px;" class="form-control" value="{{ old('search') }}" />
                                 </div>
                                 <!--<div class="col-md-2">
                                     <span style="font-weight: bold;">Status : </span>
@@ -54,6 +54,7 @@
                                 <th >#</th>
                                 <th class="borderright"><a href="javascript:void(0);" onclick="return sortrecbyfield('blogtitle');" >Title</a></th>
                                 <th class="borderright"><a href="javascript:void(0);" onclick="return sortrecbyfield('categoryid');" >Description</a></th>
+                                <th class="borderright"><a href="javascript:void(0);" onclick="return sortrecbyfield('categoryid');" >Categorie Name</a></th>
                                 <!---<th class="borderright"><a href="javascript:void(0);" onclick="return sortrecbyfield('blogdate');" >Add Date</a></th>--->
                                 <th >Actions</th>
                               </tr>
@@ -67,6 +68,7 @@
                                         <td>{{ $i+1 }}</td>
                                         <td>{{ $tasks[$i]->title }}</td>
                                         <td>{{ $tasks[$i]->description }}</td>
+                                        <td>{{ $tasks[$i]->name }}</td>
                                                                                 
                                         <td>
                                         <a href="{{ route('task.edit', ['taskid' => $tasks[$i]->id]  ) }}" title="Edit"  class="fa fa-fw fa-edit"></a>
